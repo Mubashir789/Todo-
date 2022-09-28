@@ -32,7 +32,7 @@
         function posttodo() {
             let todoText = document.querySelector("#todo").value
 
-            axios.post(`http://localhost:3000/todo`, {
+            axios.post(`https://clean-lion-gabardine.cyclic.app/todo`, {
 
                 text: todoText
 
@@ -64,7 +64,7 @@
 
         
 
-        axios.get(`http://localhost:3000/todos`)
+        axios.get(`https://clean-lion-gabardine.cyclic.app/todos`)
 
 
             .then(function (response) {
