@@ -9,22 +9,56 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+
+
+    <style>
+        #todo {
+
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+
+        }
+
+        #h {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
+
+
+
 </head>
 
 <body>
-    <h1>Todo App</h1>
 
-    <form onsubmit="posttodo(); return false;">
+    <center>
+
+        <div id="h">
+            <h1>Todo App</h1>
 
 
-        todo : <input type="text" id="todo" required>
-        <button type="submit"> Add</button>
-        <button onclick="getalltodo()">Refresh</button>
+            <form onsubmit="posttodo(); return false;">
 
-    </form>
 
-    <h3 id="result"></h3>
+                todo : <input type="text" id="todo" required>
+                <button type="submit"> Add</button>
+                <button onclick="getalltodo()">Refresh</button>
 
+            </form>
+    </center>
+
+    <center>
+        <div>
+            <h3 id="result"></h3>
+        </div>
+        </div>
+    </center>
 
     <script>
 
@@ -62,33 +96,33 @@
 
         function getalltodo() {
 
-        
-
-        axios.get(`https://clean-lion-gabardine.cyclic.app/todos`)
 
 
-            .then(function (response) {
-                console.log(response);
-
-                document.querySelector("#result").innerHTML = ""
+            axios.get(`https://clean-lion-gabardine.cyclic.app/todos`)
 
 
-                response.data.data.map(eachTodo => {
-                    document.querySelector("#result").innerHTML += eachTodo
-                    document.querySelector("#result").innerHTML += '<br>'
+                .then(function (response) {
+                    console.log(response);
 
+                    document.querySelector("#result").innerHTML = ""
+
+
+                    response.data.data.map(eachTodo => {
+                        document.querySelector("#result").innerHTML += eachTodo
+                        document.querySelector("#result").innerHTML += '<br>'
+
+
+                    })
 
                 })
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+                .catch(function (error) {
+                    console.log(error);
+                })
 
         }
 
 
-        setInterval(getalltodo , 5000);
+        setInterval(getalltodo, 2000);
 
     </script>
 
