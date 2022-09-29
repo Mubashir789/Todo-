@@ -14,20 +14,75 @@
     <style>
         #todo {
 
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 85%;
+           
             box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            transition: width 0.4s ease-in-out;
 
         }
 
         #h {
-            border-radius: 5px;
-            background-color: #f2f2f2;
+            border-radius: 20px;
+            background-color: white;
             padding: 20px;
+            margin-top: 120px;
+            margin-left: 70px;
+            margin-right: 70px;
+
+        }
+
+        #button {
+
+
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 60%;
+            margin-left: 20px;
+        }
+
+        #button1 {
+            width: 70%;
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            border-radius: 12px;
+        }
+
+        #h >#h2 {
+
+            border-radius: 20px;
+            background-color: gold;
+            padding: 20px;
+            margin-top: 120px;
+            margin-left: 70px;
+            margin-right: 70px;
+
         }
     </style>
 
@@ -35,30 +90,39 @@
 
 </head>
 
-<body>
+<body style="background-color: #E8DAEF ;">
+
+
 
     <center>
 
         <div id="h">
-            <h1>Todo App</h1>
 
+            <div id="h1">
+                <h1>Todo App</h1>
+            </div>
 
             <form onsubmit="posttodo(); return false;">
 
-
-                todo : <input type="text" id="todo" required>
-                <button type="submit"> Add</button>
-                <button onclick="getalltodo()">Refresh</button>
+                <div id="h2">
+                    <input type="text" id="todo" placeholder="Add New..." required>
+                    <button type="submit" id="button"> Add</button>
+                    <button onclick="getalltodo()" id="button1">Refresh</button>
+                </div>
 
             </form>
+
+
+
+
+
+            <h3 id="result"></h3>
+
+
+        </div>
     </center>
 
-    <center>
-        <div>
-            <h3 id="result"></h3>
-        </div>
-        </div>
-    </center>
+    </div>
 
     <script>
 
@@ -82,6 +146,7 @@
                     response.data.data.map(eachTodo => {
                         document.querySelector("#result").innerHTML += eachTodo
                         document.querySelector("#result").innerHTML += '<br>'
+
 
 
                     })
