@@ -102,7 +102,7 @@
                 <h1>Todo App</h1>
             </div>
 
-            <form onsubmit="posttodo(); return false;">
+            <form onsubmit="posttodo(); return false;" id="form">
 
                 <div id="h2">
                     <input type="text" id="todo" placeholder="Add New..." required>
@@ -129,6 +129,8 @@
 
         function posttodo() {
             let todoText = document.querySelector("#todo").value
+            let form = document.querySelector("#form").reset()
+
 
             axios.post(`https://clean-lion-gabardine.cyclic.app/todo`, {
 
@@ -138,18 +140,18 @@
 
 
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response.data);
 
-                    document.querySelector("#result").innerHTML = ""
-
-
-                    response.data.data.map(eachTodo => {
-                        document.querySelector("#result").innerHTML += eachTodo
-                        document.querySelector("#result").innerHTML += '<br>'
+                    document.querySelector("#result").innerHTML = response.data.message
 
 
+                    // response.data.data.map(eachTodo => {
+                    //     document.querySelector("#result").innerHTML += eachTodo
+                    //     document.querySelector("#result").innerHTML += '<br>'
 
-                    })
+
+
+                    // })
 
                 })
                 .catch(function (error) {
@@ -173,7 +175,7 @@
 
 
                     response.data.data.map(eachTodo => {
-                        document.querySelector("#result").innerHTML += eachTodo
+                        document.querySelector("#result").innerHTML += eachTodo.text
                         document.querySelector("#result").innerHTML += '<br>'
 
 
