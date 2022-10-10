@@ -22,18 +22,13 @@ app.use(cors());
 
 
 app.post('/todo', (req, res) => {
-
-
-
     todoModel.create({ text: req.body.text }, (err, saved) => {
         if (!err) {
 
             console.log(saved)
 
             res.send({
-
-                // message: "Your todo is Saved",
-
+                message: "Your todo is Saved",
             })
         } else {
             res.status(500).send({
@@ -48,7 +43,6 @@ app.post('/todo', (req, res) => {
 })
 
 app.get('/todos', (req, res) => {
-
     todoModel.find({}, (err, data) => {
         if (!err) {
             res.send({
@@ -58,8 +52,8 @@ app.get('/todos', (req, res) => {
 
             })
 
-        }else {
-            res.status(500),send({
+        } else {
+            res.status(500), send({
 
                 message: "Server Error!"
 
@@ -73,24 +67,16 @@ app.get('/todos', (req, res) => {
 
 })
 
-app.get('/delete', (req, res) => {
-
-    todoModel.find({}, (err, data) => {
+app.delete('/delete', (req, res) => {
+    todoModel.deleteMany({}, (err, data) => {
         if (!err) {
             res.send({
-
-                // message: "Here is your todo list",
-                data: {}
-
+                message: "Here is your todo list",
             })
-
-        }else {
-            res.status(500),send({
-
+        } else {
+            res.status(500), send({
                 message: "Server Error!"
-
             })
-
         }
 
 

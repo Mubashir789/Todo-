@@ -127,7 +127,15 @@
     </div>
 
     <script>
-
+        function Delete() {
+            axios.delete(`https://clean-lion-gabardine.cyclic.app/delete`)
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
 
         function posttodo() {
             let todoText = document.querySelector("#todo").value
@@ -142,11 +150,9 @@
 
 
                 .then(function (response) {
-                    console.log(response.data);
+                    getalltodo()
 
                     // document.querySelector("#result").innerHTML = response.data
-
-
                     // response.data.data.map(eachTodo => {
                     //     document.querySelector("#result").innerHTML += eachTodo
                     //     document.querySelector("#result").innerHTML += '<br>'
@@ -168,7 +174,7 @@
 
 
             axios.get(`https://clean-lion-gabardine.cyclic.app/todos`)
-        
+
 
 
                 .then(function (response) {
@@ -192,32 +198,7 @@
         }
 
 
-        function Delete() {
 
-
-
-            axios.delete(`https://clean-lion-gabardine.cyclic.app/delete`)
-
-
-                .then(function (response) {
-                    console.log(response);getalltodo()
-
-                    // document.querySelector("#result").innerHTML = response.data
-
-
-                    // response.data.data.map(eachTodo => {
-                    //     document.querySelector("#result").innerHTML += eachTodo.text
-                    //     document.querySelector("#result").innerHTML += '<br>'
-
-
-                    // })
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-
-        }
 
         getalltodo()
         // setInterval(getalltodo, 2000);
