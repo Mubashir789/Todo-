@@ -32,7 +32,7 @@ app.post('/todo', (req, res) => {
 
             res.send({
 
-                message: "Your todo is Saved",
+                // message: "Your todo is Saved",
 
             })
         } else {
