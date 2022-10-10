@@ -71,9 +71,33 @@ app.get('/todos', (req, res) => {
     });
 
 
-
 })
 
+app.get('/delete', (req, res) => {
+
+    todoModel.find({}, (err, data) => {
+        if (!err) {
+            res.send({
+
+                message: "Here is your todo list",
+                data: {}
+
+            })
+
+        }else {
+            res.status(500),send({
+
+                message: "Server Error!"
+
+            })
+
+        }
+
+
+    });
+
+
+})
 
 
 

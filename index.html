@@ -16,13 +16,13 @@
         #todo {
 
             width: 85%;
-           
+
             box-sizing: border-box;
             border: 2px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
             background-color: white;
-            
+
             background-position: 10px 10px;
             background-repeat: no-repeat;
             padding: 12px 20px 12px 40px;
@@ -75,7 +75,7 @@
             border-radius: 12px;
         }
 
-        #h >#h2 {
+        #h>#h2 {
 
             border-radius: 20px;
             background-color: gold;
@@ -111,6 +111,7 @@
                     <button onclick="getalltodo()" id="button1">Refresh</button>
                 </div>
 
+                <button id="button1" onclick="Delete()">Delete</button>
             </form>
 
 
@@ -143,7 +144,7 @@
                 .then(function (response) {
                     console.log(response.data);
 
-                    document.querySelector("#result").innerHTML = response.data
+                    // document.querySelector("#result").innerHTML = response.data
 
 
                     // response.data.data.map(eachTodo => {
@@ -189,6 +190,33 @@
 
         }
 
+
+        function getalltodo() {
+
+
+
+            axios.get(`https://clean-lion-gabardine.cyclic.app/delete`)
+
+
+                .then(function (response) {
+                    console.log(response);
+
+                    document.querySelector("#result").innerHTML = response.data.data
+
+
+                    // response.data.data.map(eachTodo => {
+                    //     document.querySelector("#result").innerHTML += eachTodo.text
+                    //     document.querySelector("#result").innerHTML += '<br>'
+
+
+                    // })
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+        }
 
         setInterval(getalltodo, 2000);
 
