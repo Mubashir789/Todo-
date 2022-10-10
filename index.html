@@ -111,9 +111,9 @@
                     <button onclick="getalltodo()" id="button1">Refresh</button>
                 </div>
 
-                <button id="button1" onclick="Delete()">Delete</button>
-            </form>
 
+            </form>
+            <button id="button1" onclick="Delete()">Delete</button>
 
 
 
@@ -167,7 +167,7 @@
 
 
 
-            axios.get(`https://clean-lion-gabardine.cyclic.app/todos`)
+            axios.delete(`https://clean-lion-gabardine.cyclic.app/todos`)
 
 
                 .then(function (response) {
@@ -191,7 +191,7 @@
         }
 
 
-        function getalltodo() {
+        function Delete() {
 
 
 
@@ -199,9 +199,9 @@
 
 
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response);getalltodo()
 
-                    document.querySelector("#result").innerHTML = response.data.data
+                    // document.querySelector("#result").innerHTML = response.data
 
 
                     // response.data.data.map(eachTodo => {
@@ -218,7 +218,8 @@
 
         }
 
-        setInterval(getalltodo, 2000);
+        getalltodo()
+        // setInterval(getalltodo, 2000);
 
     </script>
 

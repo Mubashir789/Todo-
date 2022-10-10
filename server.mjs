@@ -79,7 +79,7 @@ app.get('/delete', (req, res) => {
         if (!err) {
             res.send({
 
-                message: "Here is your todo list",
+                // message: "Here is your todo list",
                 data: {}
 
             })
