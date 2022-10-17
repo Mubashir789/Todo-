@@ -29,7 +29,7 @@ app.post('/todo', (req, res) => {
 
             res.send({
                 message: "Your Todo Is Saved",
-                data : text
+                data: text
             })
         } else {
             res.status(500).send({
@@ -68,6 +68,30 @@ app.get('/todos', (req, res) => {
 
 })
 
+app.put('/todo/:id', async (req, res) => {
+
+    try {
+        let data = await todoModel
+            .findByIdAndUpdate(req.params.id, { text: req.body.text } , {new : true})
+            .exec()
+
+        res.send({
+
+            message: "Your Todo Is Update",
+            data: data
+
+        })
+
+    } catch (error) {
+        res.status(500), send({
+
+            message: "Server Error!"
+
+        })
+    }
+})
+
+
 app.delete('/delete', (req, res) => {
     todoModel.deleteMany({}, (err, data) => {
         if (!err) {
@@ -88,7 +112,7 @@ app.delete('/delete', (req, res) => {
 
 
 app.delete('/del/:id', (req, res) => {
-    todoModel.deleteOne({_id : req.params.id}, (err, data) => {
+    todoModel.deleteOne({ _id: req.params.id }, (err, data) => {
         if (!err) {
             res.send({
                 message: "Your Todo Is Deleted Successfully!!",
