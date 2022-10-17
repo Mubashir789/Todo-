@@ -85,7 +85,6 @@
             margin-right: 70px;
 
         }
-
     </style>
 
 
@@ -128,24 +127,24 @@
     </div>
 
     <script>
-        let Delete = async() => {
-            try{
+        let Delete = async () => {
+            try {
                 let response = await axios.delete(`https://clean-lion-gabardine.cyclic.app/delete`)
 
-            document.querySelector("#message").innerHTML = response.data.message
+                document.querySelector("#message").innerHTML = response.data.message
 
-            setTimeout(() => {
+                setTimeout(() => {
 
-                document.querySelector("#message").innerHTML = ""
+                    document.querySelector("#message").innerHTML = ""
 
-            }, 2000);
+                }, 2000);
 
-            document.querySelector("#result").innerHTML=""
+                document.querySelector("#result").innerHTML = ""
 
-            }catch (error) {
-                
+            } catch (error) {
+
             }
-          
+
 
 
 
@@ -199,10 +198,16 @@
 
                     response.data.data.map(eachTodo => {
                         document.querySelector("#result").innerHTML += `<span id = 'span-${eachTodo._id}'> ${eachTodo.text} </span>`
-                        document.querySelector("#result").innerHTML += `<input  id = 'input-${eachTodo._id}' value = '${eachTodo.text}' style = "display:none;" />`
+                        document.querySelector("#result").innerHTML +=
+                            `<form id = 'form-${eachTodo._id}' style = "display : none;"onsubmit="updateTodo('${eachTodo._id}'); return false">
+                         <input  id = 'input-${eachTodo._id}' value = '${eachTodo.text}' />
+                         <button type = "submit"> Update </button>
+                       
+                         </form>`
 
-                        document.querySelector("#result").innerHTML += `&nbsp; &nbsp; <button onclick = "deleteTodo('${eachTodo._id}')"> Delete </button>
-                        <button onclick = "editTodo('${eachTodo}')"> Edit </button>`
+                        document.querySelector("#result").innerHTML += 
+                        `&nbsp; &nbsp; <button onclick = "deleteTodo('${eachTodo._id}')" id = 'delete-${eachTodo._id}'> Delete </button>
+                        <button onclick = "editTodo('${eachTodo._id}')" id='edit-${eachTodo._id}'> Edit </button>`
 
                         document.querySelector("#result").innerHTML += '<br>'
 
@@ -246,14 +251,47 @@
 
         }
 
-        let editTodo = async(id) => {
-           
-            console.log("edit id: " ,id)
-          document.querySelector(`#input-${id}`).style.display = "inline"
-          document.querySelector(`#span-${id}`).style.display = "none"
+        let editTodo = async (id) => {
+
+            console.log("edit id: ", id)
+            document.querySelector(`#form-${id}`).style.display = "inline"
+            document.querySelector(`#span-${id}`).style.display = "none"
+            document.querySelector(`#delete-${id}`).style.display = "none"
+            document.querySelector(`#edit-${id}`).style.display = "none"
 
         }
 
+        let updateTodo = async (id) => {
+
+            console.log("Update id : " , id)
+
+            let updateText = document.querySelector(`#input-${id}`).value
+
+
+            try {
+                
+                let response = await axios.put (`https://clean-lion-gabardine.cyclic.app/todo/${id}` , 
+                {
+                    text : updateText
+                })
+
+                document.querySelector("#message").innerHTML = response.data.message
+                setTimeout(() => {
+                    document.querySelector("#message").innerHTML = ""
+                }, 2000);
+
+                getAllTodos();
+
+            } catch (error) {
+                console.log("error: ", error);
+            }
+
+
+
+
+
+
+        }
 
     </script>
 
