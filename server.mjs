@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { text } from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose';
 
@@ -28,7 +28,8 @@ app.post('/todo', (req, res) => {
             console.log(saved)
 
             res.send({
-                message: "Your todo is Saved",
+                message: "Your Todo Is Saved",
+                data : text
             })
         } else {
             res.status(500).send({
@@ -71,7 +72,26 @@ app.delete('/delete', (req, res) => {
     todoModel.deleteMany({}, (err, data) => {
         if (!err) {
             res.send({
-                message: "Here is your todo list",
+                message: "All Todo Is Deleted Successfully!!",
+            })
+        } else {
+            res.status(500), send({
+                message: "Server Error!"
+            })
+        }
+
+
+    });
+
+
+})
+
+
+app.delete('/del/:id', (req, res) => {
+    todoModel.deleteOne({_id : req.params.id}, (err, data) => {
+        if (!err) {
+            res.send({
+                message: "Your Todo Is Deleted Successfully!!",
             })
         } else {
             res.status(500), send({
