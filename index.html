@@ -61,7 +61,6 @@
         #button1 {
             width: 70%;
             background-color: #4CAF50;
-            /* Green */
             border: none;
             color: white;
             padding: 20px;
@@ -116,7 +115,7 @@
             <button id="button1" onclick="Delete()">Delete All</button>
 
 
-            <h5 id="message" style="height: 20px; color: red;"></h5>
+            <h4 id="message" style="height: 20px; color: red;"></h4>
 
             <h3 id="result"></h3>
 
@@ -201,13 +200,43 @@
                         document.querySelector("#result").innerHTML +=
                             `<form id = 'form-${eachTodo._id}' style = "display : none;"onsubmit="updateTodo('${eachTodo._id}'); return false">
                          <input  id = 'input-${eachTodo._id}' value = '${eachTodo.text}' />
-                         <button type = "submit"> Update </button>
+                         <button type = "submit"  onclick="getalltodo()" id="update1" 
+                         style = "background-color: #4CAF50; border: none;color: white;
+            // padding: 10px;
+            text-align: center;text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            border-radius: 12px;
+            cursor: pointer;"> Update </button>
                        
                          </form>`
 
-                        document.querySelector("#result").innerHTML += 
-                        `&nbsp; &nbsp; <button onclick = "deleteTodo('${eachTodo._id}')" id = 'delete-${eachTodo._id}'> Delete </button>
-                        <button onclick = "editTodo('${eachTodo._id}')" id='edit-${eachTodo._id}'> Edit </button>`
+                        document.querySelector("#result").innerHTML +=
+                            `&nbsp; &nbsp; <button onclick = "deleteTodo('${eachTodo._id}')" id = 'delete-${eachTodo._id}' style = " background-color: #4CAF50;
+            border: none;
+            color: white;
+            // padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            border-radius: 12px;"> Delete </button>
+                        <button onclick = "editTodo('${eachTodo._id}')" id='edit-${eachTodo._id}' style = " background-color: #4CAF50;
+            border: none;
+            color: white;
+            // padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            border-radius: 12px;"> Edit </button>`
 
                         document.querySelector("#result").innerHTML += '<br>'
 
@@ -263,17 +292,17 @@
 
         let updateTodo = async (id) => {
 
-            console.log("Update id : " , id)
+            console.log("Update id : ", id)
 
             let updateText = document.querySelector(`#input-${id}`).value
 
 
             try {
-                
-                let response = await axios.put (`https://clean-lion-gabardine.cyclic.app/todo/${id}` , 
-                {
-                    text : updateText
-                })
+
+                let response = await axios.put(`https://clean-lion-gabardine.cyclic.app/todo/${id}`,
+                    {
+                        text: updateText
+                    })
 
                 document.querySelector("#message").innerHTML = response.data.message
                 setTimeout(() => {
